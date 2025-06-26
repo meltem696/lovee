@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sana Aşık Olmamın 10 Nedeni</title>
+  <!-- <link rel="stylesheet" href="style.css" /> -->
+</head>
+<body>
+  <audio id="bgMusic" loop>
+    <source src="romantik.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="intro" id="intro">
+    <h2>Sevgilinin Adı Ne? 😍</h2>
+    <input type="text" id="loverName" placeholder="Adını yaz canımmm" />
+    <button onclick="startLove()">Başla 💘</button>
+  </div>
+
+  <div class="container hidden" id="mainContent">
+    <h1 id="pageTitle"></h1>
+    <div id="reasonBox">Hazır mısın aşkımmm? ❤️</div>
+    <button onclick="showReason()">Bir Sonraki Neden</button>
+    <div id="finalMessage" class="hidden">Bir mektubun var... 💌</div>
+
+    <div id="letterArea" class="hidden">
+      <div class="envelope" onclick="openLetter()">
+        <div class="flap"></div>
+        <div class="letter hidden" id="loveLetter">
+          <p id="letterText"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<style>body {
+  background: linear-gradient(to bottom right, #8b0000, #ff0000);
+  font-family: 'Comic Sans MS', cursive;
+  text-align: center;
+  color: #fff;
+  margin: 0;
+  padding: 50px 20px;
+  overflow-x: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+input, button {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+}
+
+input {
+  width: 250px;
+}
+
+button {
+  background-color: #ff0033;
+  color: white;
+  font-weight: bold;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #cc0022;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+}
+
+#reasonBox {
+  font-size: 24px;
+  margin-top: 30px;
+  min-height: 100px;
+}
+
+#finalMessage {
+  font-size: 28px;
+  margin-top: 40px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Zarflı mektup büyük ekran için */
+#letterArea {
+  margin-top: 50px;
+}
+
+.envelope {
+  width: 80vw;
+  height: 60vh;
+  background: #fff0f0;
+  margin: 0 auto;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.flap {
+  width: 0;
+  height: 0;
+  border-left: 40vw solid transparent;
+  border-right: 40vw solid transparent;
+  border-bottom: 30vh solid #fff0f0;
+  position: absolute;
+  top: -30vh;
+  left: 0;
+}
+
+.letter {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  top: 5%;
+  left: 5%;
+  background: #ffe6e6;
+  padding: 20px;
+  font-family: 'Georgia', cursive;
+  font-size: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px #ff4d4d;
+  animation: slideLetter 2s forwards;
+  overflow-y: auto;
+}
+
+@keyframes slideLetter {
+  0% { transform: translateY(100px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Çizilmiş Kalpler */
+.animated-heart {
+  width: 50px;
+  height: 45px;
+  position: absolute;
+  background-color: red;
+  transform: rotate(-45deg);
+  animation: floatHearts 6s ease-in;
+  opacity: 0.9;
+  z-index: 999;
+}
+
+.animated-heart::before,
+.animated-heart::after {
+  content: "";
+  width: 50px;
+  height: 45px;
+  position: absolute;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.animated-heart::before {
+  top: -25px;
+  left: 0;
+}
+
+.animated-heart::after {
+  left: 25px;
+  top: 0;
+}
+
+@keyframes floatHearts {
+  0% {
+    transform: translateY(0) rotate(-45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-600px) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+/* Öpücük */
+.kiss {
+  position: absolute;
+  font-size: 40px;
+  animation: kissAnim 3s ease forwards;
+}
+
+@keyframes kissAnim {
+  0% { opacity: 1; transform: scale(0.5) translateY(0); }
+  100% { opacity: 0; transform: scale(2) translateY(-100px); }
+}
+</style>
+  <script >const reasons = [
+  "Gülüşün dünyamı aydınlatıyor 🌞",
+  "Sen yanımda olunca her şey güzel 💖",
+  "Sana baktığımda geleceği görüyorum 🥰",
+  "Sana sarılmak evime dönmek gibi 🏠",
+  "Senin sesin kalbimi yumuşatıyor 🎶",
+  "Birlikte her şey mümkün 💪",
+  "Sen benim mucizemsin ✨",
+  "Aşkımızı her şeyden çok seviyorum 💘",
+  "Seninle yaşlanmak istiyorum 👴👵",
+  "Sonsuza kadar sadece sen... 💍"
+];
+
+let index = 0;
+let loverName = "";
+
+function startLove() {
+  const nameInput = document.getElementById("loverName");
+  loverName = nameInput.value.trim();
+
+  if (loverName === "") {
+    alert("Adını yaz aşk böceği! 🐞");
+    return;
+  }
+
+  document.getElementById("intro").classList.add("hidden");
+  document.getElementById("mainContent").classList.remove("hidden");
+
+  document.getElementById("pageTitle").textContent = `${loverName}, Sana Aşık Olmamın 10 Nedeni 💘`;
+
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.5;
+  music.play();
+}
+
+function showReason() {
+  const box = document.getElementById("reasonBox");
+  if (index < reasons.length) {
+    box.textContent = reasons[index];
+    index++;
+    createDrawnHeart();
+    if (index === reasons.length) {
+      setTimeout(() => {
+        document.getElementById("finalMessage").classList.remove("hidden");
+        document.getElementById("letterArea").classList.remove("hidden");
+      }, 1500);
+    }
+  } else {
+    createDrawnHeart();
+  }
+}
+
+function openLetter() {
+  const letter = document.getElementById("loveLetter");
+  const text = `
+${loverName}’cim 💖
+
+Bu mektubu okurken yüzünde gülümseme varsa, amacım gerçekleşmiş demektir...
+
+Kod satırlarının arasında aşkımı sana fısıldadım.
+Kalbimi ekranın ortasına bıraktım.
+
+Sonsuza dek seninim. 💍
+
+Bir öpücük bırakıyorum: 💋
+  `;
+  document.getElementById("letterText").textContent = text;
+  letter.classList.remove("hidden");
+
+  for (let i = 0; i < 30; i++) {
+    setTimeout(createDrawnHeart, i * 200);
+  }
+
+  for (let i = 0; i < 5; i++) {
+    setTimeout(createKiss, i * 500 + 300);
+  }
+}
+
+function createDrawnHeart() {
+  const heart = document.createElement("div");
+  heart.className = "animated-heart";
+  heart.style.left = `${Math.random() * 100}%`;
+  heart.style.bottom = "0px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+
+function createKiss() {
+  const kiss = document.createElement("div");
+  kiss.className = "kiss";
+  kiss.textContent = "💋";
+  kiss.style.left = `${Math.random() * 90}%`;
+  kiss.style.top = `${Math.random() * 80}%`;
+  document.body.appendChild(kiss);
+  setTimeout(() => kiss.remove(), 3000);
+}
+</script>
+</body>
+</html>
